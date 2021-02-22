@@ -10,4 +10,12 @@ class FirebaseController {
   static Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
   }
+
+    static Future<void> signUp(String email, String password) async {
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+  }
+  
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:personal_care/controller/firebasecontrollor.dart';
 import 'package:personal_care/screen/home_screen.dart';
 import 'package:personal_care/screen/myview/mydialog.dart';
+import 'package:personal_care/screen/signup_screen.dart';
 
 class SignInScreen extends StatefulWidget {
   static const routeName = '/signInScreen';
@@ -33,7 +34,20 @@ class _SignInState extends State<SignInScreen> {
           key: formKey,
           child: SingleChildScrollView(
             child: Column(
-              children: [
+              children: <Widget>[
+                Stack(
+                  children: <Widget>[
+                   Image.asset('assets/images/1.jpg'),
+                   Positioned(
+                     top: 130.0,
+                     left: 12.0,
+                    child: Text('personal care', style: TextStyle(color: Colors.blue[900],
+                fontSize: 25.0,
+                fontFamily: 'AudioWide'),
+                ),
+                   ),
+                  ],
+                ),
                 TextFormField(
                   decoration: InputDecoration(
                     hintText: 'Email',
@@ -52,17 +66,36 @@ class _SignInState extends State<SignInScreen> {
                   validator: con.validatorPassword,
                   onSaved: con.savedPassword,
                 ),
-                RaisedButton(
-                  onPressed: con.signIn,
-                  child: Text(
-                    'Sign In',
-                    style: Theme.of(context).textTheme.button,
+                    Container(
+                  width: 350.0,
+                  height: 60.0,
+                  padding: const EdgeInsets.only(top: 16.0),
+                  child: RaisedButton(
+                    child: Text(
+                      'Sign In',
+                      style: TextStyle(fontSize: 20.0, color: Colors.white),
+                    ),
+                    color: Colors.blue,
+                    onPressed: con.signIn,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0)),
                   ),
                 ),
+                SizedBox(
+                  height: 30.0,
+                ),
+                FlatButton(
+                  onPressed: con.signUp,
+                  child: Text(
+                    'No account yet? Sign Up',
+                    style: TextStyle(fontSize: 15.0),
+                  ),
+                )
               ],
             ),
           ),
-        ));
+        ),
+        );
   }
 }
 
@@ -71,6 +104,11 @@ class _Controller {
   _Controller(this.state);
   String email;
   String password;
+
+
+  void signUp() async {
+    Navigator.pushNamed(state.context, SignUpScreen.routeName);
+  }
 
   String validatorEmail(String value) {
     if (value.contains('@') && value.contains('.'))

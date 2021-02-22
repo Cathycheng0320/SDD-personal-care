@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:personal_care/screen/home_screen.dart';
 import 'package:personal_care/screen/signin_screen.dart';
+import 'package:personal_care/screen/signup_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,6 +18,7 @@ class PersonalCareApp extends StatelessWidget {
       routes: {
         SignInScreen.routeName: (context) => SignInScreen(),
         HomeScreen.routeName: (context) => HomeScreen(),
+        SignUpScreen.routeName: (context) => SignUpScreen(),
       },
     );
   }
