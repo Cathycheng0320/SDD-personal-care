@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:personal_care/controller/Authentication.dart';
 import 'package:personal_care/controller/firebasecontrollor.dart';
 import 'package:personal_care/screen/home_screen.dart';
 import 'package:personal_care/screen/myview/mydialog.dart';
@@ -15,14 +16,13 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInState extends State<SignInScreen> {
   _Controller con;
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  var formKey = GlobalKey<FormState>();
+  FirebaseUser user;
   @override
   void initState() {
     super.initState();
     con = _Controller(this);
   }
-
-  void render(fn) => setState(fn);
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +77,36 @@ class _SignInState extends State<SignInScreen> {
                     ),
                     color: Colors.blue,
                     onPressed: con.signIn,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0)),
+                  ),
+                ),
+                Container(
+                  width: 350.0,
+                  height: 60.0,
+                  padding: const EdgeInsets.only(top: 16.0),
+                  child: RaisedButton(
+                    child: Text(
+                      'Sign In With Google',
+                      style: TextStyle(fontSize: 20.0, color: Colors.white),
+                    ),
+                    color: Colors.blue,
+                    onPressed: () {
+                      signInWithGoogle().then((user) async {
+                        this.user = user;
+                        print('========google sign in start');
+                        var personalCare =
+                            await FirebaseController.getPersonalCare(
+                                user.email);
+                        print('========google call');
+                        Navigator.pushReplacementNamed(
+                            context, HomeScreen.routeName, arguments: {
+                          'user': user,
+                          'personalCareList': personalCare
+                        });
+                        print('========google sign in finish');
+                      });
+                    },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0)),
                   ),
@@ -138,9 +168,9 @@ class _Controller {
 
     state.formKey.currentState.save();
 
-    User user;
+    FirebaseUser user;
     try {
-      user = await FirebaseController.signIn(email: email, password: password);
+      user = await FirebaseController.signIn(email, password);
       print('=======${user.email}');
     } catch (e) {
       MyDialog.info(
@@ -153,4 +183,5 @@ class _Controller {
     Navigator.pushNamed(state.context, HomeScreen.routeName, arguments: 
     {'user': user});
   }
+ 
 }

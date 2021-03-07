@@ -13,7 +13,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeState extends State<HomeScreen> {
   _Controller con;
-  User user;
+  FirebaseUser user;
   @override
   void initState() {
     super.initState();

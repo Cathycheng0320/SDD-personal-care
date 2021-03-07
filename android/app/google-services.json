@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "435150563661-22ob64m4mroo3rhtasg156u5a1va8ikn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.uco.msinkankas.cmsc4513.SDD_Project",
+            "certificate_hash": "bc608926fe697e9c3412db4b8d1afaee1ed56d31"
+          }
+        },
+        {
           "client_id": "435150563661-97k3sr1sn770ri5ahcm6i9luhnu5f1p2.apps.googleusercontent.com",
           "client_type": 3
         }
