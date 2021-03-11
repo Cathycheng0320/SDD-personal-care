@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:personal_care/controller/firebasecontrollor.dart';
+import 'package:personal_care/screen/addeventpage_screen.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = '/signInScreen/homeScreen';
@@ -12,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeState extends State<HomeScreen> {
+  CalendarController _calendarController = CalendarController();
   _Controller con;
   FirebaseUser user;
   @override
@@ -28,6 +31,7 @@ class _HomeState extends State<HomeScreen> {
     user ??= args['user'];
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.red,
         title: Text('Home'),
       ),
       drawer: Drawer(
@@ -45,7 +49,33 @@ class _HomeState extends State<HomeScreen> {
           ],
         ),
       ),
-      body: Text('user home ${user.email}'),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Card(
+              clipBehavior: Clip.antiAlias,
+              margin: const EdgeInsets.all(8.0),
+              child: TableCalendar(
+                calendarController: _calendarController,
+                weekendDays: [6],
+                headerStyle: HeaderStyle(
+                    decoration: BoxDecoration(
+                  color: Colors.red,
+                )),
+                calendarStyle: CalendarStyle(),
+                builders: CalendarBuilders(),
+              ),
+            )
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.pushNamed(context, AddEventPageScreen.routeName);
+        },
+      ),
     );
   }
 }
