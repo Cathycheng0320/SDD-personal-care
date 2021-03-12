@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
+
 
 
 class AddEventPageScreen extends StatefulWidget {
@@ -11,7 +11,7 @@ class AddEventPageScreen extends StatefulWidget {
 }
 
 class _AddEventPageState extends State<AddEventPageScreen> {
-  final _formKey = GlobalKey<FormBuilderState>();
+  // final _formKey = GlobalKey<FormBuilderState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,13 +21,7 @@ class _AddEventPageState extends State<AddEventPageScreen> {
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: <Widget>[
-          FormBuilder(
-            child: Column(
-              children:[
-               
-              ],
-              ),
-            )
+         
         ],
       ),
     );

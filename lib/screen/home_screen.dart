@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:personal_care/controller/firebasecontrollor.dart';
 import 'package:personal_care/screen/addeventpage_screen.dart';
+import 'package:personal_care/screen/signin_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -88,9 +89,8 @@ class _Controller {
     try {
       await FirebaseController.signOut();
     } catch (e) {
-      // do nothing
+      print('signOut exception: ${e.message}');
     }
-    Navigator.of(state.context).pop(); // close the drawer
-    Navigator.of(state.context).pop(); // pop Home screen
+    Navigator.pushReplacementNamed(state.context, SignInScreen.routeName);
   }
 }

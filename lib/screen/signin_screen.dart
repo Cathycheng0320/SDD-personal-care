@@ -70,6 +70,7 @@ class _SignInState extends State<SignInScreen> {
                   width: 350.0,
                   height: 60.0,
                   padding: const EdgeInsets.only(top: 16.0),
+                  // ignore: deprecated_member_use
                   child: RaisedButton(
                     child: Text(
                       'Sign In',
@@ -85,6 +86,7 @@ class _SignInState extends State<SignInScreen> {
                   width: 350.0,
                   height: 60.0,
                   padding: const EdgeInsets.only(top: 16.0),
+                  // ignore: deprecated_member_use
                   child: RaisedButton(
                     child: Text(
                       'Sign In With Google',
