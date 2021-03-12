@@ -27,8 +27,14 @@ class _AboutPageState extends State<AboutPageScreen> {
             title: Text('Edit Info', style: TextStyle(fontSize: 15.0)),
             content: Column(
               children: <Widget>[
-                TextField(
-                  decoration: InputDecoration(hintText: 'Enter Summary'),
+                TextFormField(
+                  style:TextStyle(fontSize: 14.0),
+                  decoration: InputDecoration(
+                    hintText: 'Enter Summary'
+                    ),
+                    autocorrect: true,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: 3,
                   onChanged: (value) {
                     this.summary = value;
                   },
@@ -36,8 +42,14 @@ class _AboutPageState extends State<AboutPageScreen> {
                 SizedBox(
                   height: 5.0,
                 ),
-                TextField(
-                  decoration: InputDecoration(hintText: 'Enter Features'),
+                TextFormField(
+                  style:TextStyle(fontSize: 14.0),
+                  decoration: InputDecoration(
+                    hintText: 'Enter Features'
+                    ),
+                    autocorrect: true,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: 5,
                   onChanged: (value) {
                     this.features = value;
                   },
@@ -74,8 +86,14 @@ class _AboutPageState extends State<AboutPageScreen> {
             title: Text('update Info', style: TextStyle(fontSize: 15.0)),
             content: Column(
               children: <Widget>[
-                TextField(
-                  decoration: InputDecoration(hintText: 'Enter Summary'),
+                TextFormField(
+                  style:TextStyle(fontSize: 14.0),
+                  decoration: InputDecoration(
+                    hintText: 'Enter Summary'
+                    ),
+                    autocorrect: true,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: 3,
                   onChanged: (value) {
                     this.summary = value;
                   },
@@ -83,8 +101,14 @@ class _AboutPageState extends State<AboutPageScreen> {
                 SizedBox(
                   height: 5.0,
                 ),
-                TextField(
-                  decoration: InputDecoration(hintText: 'Enter Features'),
+                TextFormField(
+                  style:TextStyle(fontSize: 14.0),
+                  decoration: InputDecoration(
+                    hintText: 'Enter Features'
+                    ),
+                    autocorrect: true,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: 5,
                   onChanged: (value) {
                     this.features = value;
                   },
@@ -147,9 +171,9 @@ class _AboutPageState extends State<AboutPageScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.purple[900],
+        backgroundColor: Colors.blue[900],
         appBar: AppBar(
-          backgroundColor: Colors.purple[900],
+          backgroundColor: Colors.blue[900],
           title: Text('About Us'),
           actions: <Widget>[
             IconButton(
