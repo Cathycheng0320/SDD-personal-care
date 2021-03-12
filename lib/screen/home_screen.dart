@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:personal_care/controller/firebasecontrollor.dart';
+import 'package:personal_care/screen/aboutpage_screen.dart';
 import 'package:personal_care/screen/addeventpage_screen.dart';
 import 'package:personal_care/screen/signin_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -46,7 +47,12 @@ class _HomeState extends State<HomeScreen> {
               leading: Icon(Icons.exit_to_app),
               title: Text('Sign Out'),
               onTap: con.signOut,
-            )
+            ),
+            ListTile(
+                leading: Icon(Icons.exit_to_app),
+                title: Text('About page'),
+                onTap: con.about,
+              ),
           ],
         ),
       ),
@@ -84,6 +90,10 @@ class _HomeState extends State<HomeScreen> {
 class _Controller {
   _HomeState state;
   _Controller(this.state);
+
+    void about() {
+    Navigator.pushNamed(state.context, AboutPageScreen.routeName);
+  }
 
   void signOut() async {
     try {
