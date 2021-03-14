@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:personal_care/controller/aboutdb.dart';
+import 'package:personal_care/screen/question_screen.dart';
 
 class AboutPageScreen extends StatefulWidget {
   static const routeName = '/homeScreen/aboutPageScreen';
@@ -198,7 +199,7 @@ class _AboutPageState extends State<AboutPageScreen> {
         floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add_comment),
         onPressed: () {
-          Navigator.pushNamed(context, questionScreen.routeName);
+          Navigator.pushNamed(context, QuestionScreen.routeName);
         },
       ),
         );

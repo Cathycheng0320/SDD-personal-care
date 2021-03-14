@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:personal_care/screen/aboutpage_screen.dart';
 import 'package:personal_care/screen/addeventpage_screen.dart';
 import 'package:personal_care/screen/home_screen.dart';
+import 'package:personal_care/screen/question_screen.dart';
 import 'package:personal_care/screen/signin_screen.dart';
 import 'package:personal_care/screen/signup_screen.dart';
 
@@ -23,6 +24,7 @@ class PersonalCareApp extends StatelessWidget {
         SignUpScreen.routeName: (context) => SignUpScreen(),
         AddEventPageScreen.routeName: (context) => AddEventPageScreen(),
         AboutPageScreen.routeName: (context) => AboutPageScreen(),
+        QuestionScreen.routeName: (context) => QuestionScreen(),
       },
     );
   }
