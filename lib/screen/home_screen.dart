@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:personal_care/controller/firebasecontrollor.dart';
+import 'package:personal_care/model/personalcare.dart';
 import 'package:personal_care/screen/aboutpage_screen.dart';
 import 'package:personal_care/screen/addeventpage_screen.dart';
+import 'package:personal_care/screen/questionhome_screen.dart';
 import 'package:personal_care/screen/signin_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -19,6 +21,7 @@ class _HomeState extends State<HomeScreen> {
   CalendarController _calendarController = CalendarController();
   _Controller con;
   FirebaseUser user;
+  List<PersonalCare> personalCare;
   @override
   void initState() {
     super.initState();
@@ -31,6 +34,7 @@ class _HomeState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     Map args = ModalRoute.of(context).settings.arguments;
     user ??= args['user'];
+    personalCare ??= args['personalCareList'];
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
@@ -53,7 +57,13 @@ class _HomeState extends State<HomeScreen> {
                 title: Text('About page'),
                 onTap: con.about,
               ),
+              ListTile(
+                leading: Icon(Icons.exit_to_app),
+                title: Text('Question Form'),
+                onTap: con.questionForm,
+              ),
           ],
+          
         ),
       ),
       body: SingleChildScrollView(
@@ -88,11 +98,19 @@ class _HomeState extends State<HomeScreen> {
 }
 
 class _Controller {
-  _HomeState state;
-  _Controller(this.state);
+  _HomeState _state;
+  _Controller(this._state);
+
+    void questionForm() {
+    Navigator.pushNamed(_state.context, QuestionHomeScreen.routeName,
+    arguments: {
+      'user': _state.user,
+      'personalCareList': _state.personalCare
+    });
+  }
 
     void about() {
-    Navigator.pushNamed(state.context, AboutPageScreen.routeName);
+    Navigator.pushNamed(_state.context, AboutPageScreen.routeName);
   }
 
   void signOut() async {
@@ -101,6 +119,6 @@ class _Controller {
     } catch (e) {
       print('signOut exception: ${e.message}');
     }
-    Navigator.pushReplacementNamed(state.context, SignInScreen.routeName);
+    Navigator.pushReplacementNamed(_state.context, SignInScreen.routeName);
   }
 }

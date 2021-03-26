@@ -27,10 +27,12 @@ dependencies:
   firebase_auth: ^0.16.1
   cloud_firestore: ^0.13.6
   firebase_storage: ^3.1.6
+  image_picker: ^0.6.7
   google_sign_in: ^4.5.6
+  cached_network_image: ^2.2.0+1
   table_calendar: ^2.3.1
-  intl: ^0.15.7
-  # flutter_form_builder: ^3.2.1
+  intl: ^0.16.1
+  # flutter_form_builder: ^4.0.1
   
 
 
