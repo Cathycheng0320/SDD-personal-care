@@ -39,11 +39,32 @@ class _QuestionHomeState extends State<QuestionHomeScreen> {
       appBar: AppBar(
         title: Text('Question Form'),
       ),
-      body: Text('Question Home'),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add_comment),
         onPressed: con.add_comment,
       ),
+      body: personalCare.length == 0 
+      ? Text('No Question Form', style: TextStyle(fontSize: 30.0),)
+      : ListView.builder(
+        itemCount: personalCare.length,
+        itemBuilder: (BuildContext context, int index) => ListTile(
+          leading: Image.network(personalCare[index].photoURL),
+          trailing: Icon(Icons.keyboard_arrow_right),
+          title: Text(personalCare[index].name),
+          subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(personalCare[index].age),
+            Text(personalCare[index].race),
+            Text(personalCare[index].sex),
+            Text(personalCare[index].religiousAffiliation),
+            Text(personalCare[index].sexualOrientation),
+            Text(personalCare[index].militaryHistory),
+            Text('Created by : ${personalCare[index].createdBy}'),
+            Text('Updated at : ${personalCare[index].updatedAt}'),
+          ],
+            ),
+        ))
     );
   }
 }
@@ -60,4 +81,7 @@ class _Controller {
         });
     _state.render(() {});
   }
+  
+
+
 }

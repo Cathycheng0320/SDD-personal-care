@@ -101,6 +101,8 @@ class _Controller {
   _HomeState _state;
   _Controller(this._state);
 
+
+    // read all question's from firebase
     void questionForm() async {
     await Navigator.pushNamed(_state.context, QuestionHomeScreen.routeName,
     arguments: {

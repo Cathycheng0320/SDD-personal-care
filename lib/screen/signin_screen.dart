@@ -27,107 +27,109 @@ class _SignInState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Sign In'),
-        ),
-        body: Form(
-          key: formKey,
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Stack(
-                  children: <Widget>[
-                   Image.asset('assets/images/1.jpg'),
-                   Positioned(
-                     top: 130.0,
-                     left: 12.0,
-                    child: Text('personal care', style: TextStyle(color: Colors.blue[900],
-                fontSize: 25.0,
-                fontFamily: 'AudioWide'),
-                ),
-                   ),
-                  ],
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'Email',
-                  ),
-                  keyboardType: TextInputType.emailAddress,
-                  autocorrect: false,
-                  validator: con.validatorEmail,
-                  onSaved: con.saveEmail,
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'Password',
-                  ),
-                  obscureText: true,
-                  autocorrect: false,
-                  validator: con.validatorPassword,
-                  onSaved: con.savedPassword,
-                ),
-                    Container(
-                  width: 350.0,
-                  height: 60.0,
-                  padding: const EdgeInsets.only(top: 16.0),
-                  // ignore: deprecated_member_use
-                  child: RaisedButton(
+      appBar: AppBar(
+        title: Text('Sign In'),
+      ),
+      body: Form(
+        key: formKey,
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Stack(
+                children: <Widget>[
+                  Image.asset('assets/images/1.jpg'),
+                  Positioned(
+                    top: 130.0,
+                    left: 12.0,
                     child: Text(
-                      'Sign In',
-                      style: TextStyle(fontSize: 20.0, color: Colors.white),
+                      'personal care',
+                      style: TextStyle(
+                          color: Colors.blue[900],
+                          fontSize: 25.0,
+                          fontFamily: 'AudioWide'),
                     ),
-                    color: Colors.blue,
-                    onPressed: con.signIn,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0)),
                   ),
+                ],
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                  hintText: 'Email',
                 ),
-                Container(
-                  width: 350.0,
-                  height: 60.0,
-                  padding: const EdgeInsets.only(top: 16.0),
-                  // ignore: deprecated_member_use
-                  child: RaisedButton(
-                    child: Text(
-                      'Sign In With Google',
-                      style: TextStyle(fontSize: 20.0, color: Colors.white),
-                    ),
-                    color: Colors.blue,
-                    onPressed: () {
-                      signInWithGoogle().then((user) async {
-                        this.user = user;
-                        print('========google sign in start');
-                        var personalCare =
-                            await FirebaseController.getPersonalCare(
-                                user.email);
-                        print('========google call');
-                        Navigator.pushReplacementNamed(
-                            context, HomeScreen.routeName, arguments: {
-                          'user': user,
-                          'personalCareList': personalCare
-                        });
-                        print('========google sign in finish');
-                      });
-                    },
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0)),
-                  ),
+                keyboardType: TextInputType.emailAddress,
+                autocorrect: false,
+                validator: con.validatorEmail,
+                onSaved: con.saveEmail,
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                  hintText: 'Password',
                 ),
-                SizedBox(
-                  height: 30.0,
-                ),
-                FlatButton(
-                  onPressed: con.signUp,
+                obscureText: true,
+                autocorrect: false,
+                validator: con.validatorPassword,
+                onSaved: con.savedPassword,
+              ),
+              Container(
+                width: 350.0,
+                height: 60.0,
+                padding: const EdgeInsets.only(top: 16.0),
+                // ignore: deprecated_member_use
+                child: RaisedButton(
                   child: Text(
-                    'No account yet? Sign Up',
-                    style: TextStyle(fontSize: 15.0),
+                    'Sign In',
+                    style: TextStyle(fontSize: 20.0, color: Colors.white),
                   ),
-                )
-              ],
-            ),
+                  color: Colors.blue,
+                  onPressed: con.signIn,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0)),
+                ),
+              ),
+              Container(
+                width: 350.0,
+                height: 60.0,
+                padding: const EdgeInsets.only(top: 16.0),
+                // ignore: deprecated_member_use
+                child: RaisedButton(
+                  child: Text(
+                    'Sign In With Google',
+                    style: TextStyle(fontSize: 20.0, color: Colors.white),
+                  ),
+                  color: Colors.blue,
+                  onPressed: () {
+                    signInWithGoogle().then((user) async {
+                      this.user = user;
+                      print('========google sign in start');
+                      var personalCare =
+                          await FirebaseController.getPersonalCare(user.email);
+                      print('========google call');
+                      Navigator.pushReplacementNamed(
+                          context, HomeScreen.routeName, arguments: {
+                        'user': user,
+                        'personalCareList': personalCare
+                      });
+                      print('========google sign in finish');
+                    });
+                  },
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0)),
+                ),
+              ),
+              SizedBox(
+                height: 30.0,
+              ),
+              FlatButton(
+                onPressed: con.signUp,
+                child: Text(
+                  'No account yet? Sign Up',
+                  style: TextStyle(fontSize: 15.0),
+                ),
+              )
+            ],
           ),
         ),
-        );
+      ),
+    );
   }
 }
 
@@ -136,7 +138,6 @@ class _Controller {
   _Controller(this.state);
   String email;
   String password;
-
 
   void signUp() async {
     Navigator.pushNamed(state.context, SignUpScreen.routeName);
@@ -166,24 +167,28 @@ class _Controller {
   }
 
   void signIn() async {
-    if (!state.formKey.currentState.validate()) return;
+    if (!state.formKey.currentState.validate()) {
+      return;
+    }
 
     state.formKey.currentState.save();
+
+     MyDialog.circularProgressStart(state.context);
 
     FirebaseUser user;
     try {
       user = await FirebaseController.signIn(email, password);
       print('=======${user.email}');
     } catch (e) {
+       MyDialog.circularProgressEnd(state.context);
       MyDialog.info(
         context: state.context,
         title: 'Sign In Error',
-        content: e.toString(),
+        content: e.message ?? e.toString(),
       );
       return;
     }
-    Navigator.pushNamed(state.context, HomeScreen.routeName, arguments: 
-    {'user': user});
+    Navigator.pushNamed(state.context, HomeScreen.routeName,
+        arguments: {'user': user});
   }
- 
 }
