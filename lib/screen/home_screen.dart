@@ -101,12 +101,13 @@ class _Controller {
   _HomeState _state;
   _Controller(this._state);
 
-    void questionForm() {
-    Navigator.pushNamed(_state.context, QuestionHomeScreen.routeName,
+    void questionForm() async {
+    await Navigator.pushNamed(_state.context, QuestionHomeScreen.routeName,
     arguments: {
       'user': _state.user,
       'personalCareList': _state.personalCare
     });
+    _state.render(() {});
   }
 
     void about() {

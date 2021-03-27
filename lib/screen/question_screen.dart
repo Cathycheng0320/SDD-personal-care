@@ -255,7 +255,7 @@ void save() async {
   }
 
   void onSavedRace(String value) {
-    this.name = value;
+    this.race = value;
   }
 
     String validatorSex(String value) {
@@ -267,7 +267,7 @@ void save() async {
   }
 
   void onSavedSex(String value) {
-    this.name = value;
+    this.sex = value;
   }
 
     String validatorReligiousAffiliation(String value) {
@@ -279,7 +279,7 @@ void save() async {
   }
 
   void onSavedReligiousAffiliation(String value) {
-    this.name = value;
+    this.religiousAffiliation = value;
   }
 
       String validatorSexualOrientation(String value) {
@@ -291,7 +291,7 @@ void save() async {
   }
 
   void onSavedSexualOrientation(String value) {
-    this.name = value;
+    this.sexualOrientation = value;
   }
 
         String validatorMilitaryHistory(String value) {
@@ -303,7 +303,7 @@ void save() async {
   }
 
   void onSavedMilitaryHistory(String value) {
-    this.name = value;
+    this.militaryHistory = value;
   }
 
 }
