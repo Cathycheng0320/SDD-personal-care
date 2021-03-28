@@ -271,8 +271,8 @@ void save() async {
   }
 
     String validatorReligiousAffiliation(String value) {
-    if (value == null || value.trim().length < 5 ){
-      return 'min 5 chars';
+    if (value == null || value.trim().length < 2 ){
+      return 'min 2 chars';
     } else {
       return null;
     }
