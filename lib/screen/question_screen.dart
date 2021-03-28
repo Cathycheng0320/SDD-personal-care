@@ -129,7 +129,7 @@ class _QuestionFormState extends State<QuestionFormScreen> {
               ),
               TextFormField(
                 decoration: InputDecoration(
-                  hintText: 'religiousAffiliation',
+                  hintText: 'What is your religiousAffiliation',
                 ),
                 autocorrect: true,
                 keyboardType: TextInputType.multiline,
@@ -139,7 +139,7 @@ class _QuestionFormState extends State<QuestionFormScreen> {
               ),
               TextFormField(
                 decoration: InputDecoration(
-                  hintText: 'sexualOrientation',
+                  hintText: 'What is your sexualOrientation',
                 ),
                 autocorrect: true,
                 keyboardType: TextInputType.multiline,
@@ -149,7 +149,7 @@ class _QuestionFormState extends State<QuestionFormScreen> {
               ),
               TextFormField(
                 decoration: InputDecoration(
-                  hintText: 'militaryHistory',
+                  hintText: 'What is your militaryHistory',
                 ),
                 autocorrect: true,
                 keyboardType: TextInputType.multiline,
@@ -283,8 +283,8 @@ void save() async {
   }
 
       String validatorSexualOrientation(String value) {
-    if (value == null || value.trim().length < 5 ){
-      return 'min 5 chars';
+    if (value == null || value.trim().length < 3 ){
+      return 'min 3 chars';
     } else {
       return null;
     }
