@@ -10,7 +10,7 @@ import 'package:table_calendar/table_calendar.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = '/signInScreen/homeScreen';
-
+  
   @override
   State<StatefulWidget> createState() {
     return _HomeState();
@@ -90,7 +90,8 @@ class _HomeState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          Navigator.pushNamed(context, AddEventPageScreen.routeName);
+          Navigator.pushNamed(context, AddEventPageScreen.routeName,
+          arguments: _calendarController.selectedDay);
         },
       ),
     );
