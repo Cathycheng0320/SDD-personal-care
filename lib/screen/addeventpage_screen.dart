@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
+import 'package:personal_care/controller/event_firestore_service.dart';
+
 
 class AddEventPageScreen extends StatefulWidget {
   final DateTime selectedDate;
@@ -29,8 +31,19 @@ class _AddEventPageState extends State<AddEventPageScreen> {
         actions: [
           Center(
             child: ElevatedButton(
-              onLongPress: () async {
+              onPressed: () async {
                 // save event
+                bool validated = _formKey.currentState.validate();
+                if (validated) {
+                  _formKey.currentState.save();
+                  final data =
+                      Map<String, dynamic>.from(_formKey.currentState.value);
+                  data['date'] =
+                      (data['date'] as DateTime).millisecondsSinceEpoch;
+                  // data['userId'] = context.read(userRepoProvider).user.id;
+                  await eventDBS.create(data);
+                  Navigator.pop(context);
+                }
               },
               child: Text("Save"),
             ),
@@ -45,6 +58,8 @@ class _AddEventPageState extends State<AddEventPageScreen> {
             child: Column(
               children: [
                 FormBuilderTextField(
+                  validator: FormBuilderValidators.compose(
+                      [FormBuilderValidators.required(context)]),
                   name: "title",
                   decoration: InputDecoration(
                     hintText: "Add Title",
@@ -65,6 +80,8 @@ class _AddEventPageState extends State<AddEventPageScreen> {
                 ),
                 Divider(),
                 FormBuilderDateTimePicker(
+                  validator: FormBuilderValidators.compose(
+                      [FormBuilderValidators.required(context)]),
                   name: "date",
                   initialValue: widget.selectedDate ?? DateTime.now(),
                   fieldHintText: "Add Date",

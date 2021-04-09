@@ -1,6 +1,11 @@
+
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:personal_care/controller/event_firestore_service.dart';
 import 'package:personal_care/controller/firebasecontrollor.dart';
+import 'package:personal_care/model/app_event.dart';
 import 'package:personal_care/model/personalcare.dart';
 import 'package:personal_care/screen/aboutpage_screen.dart';
 import 'package:personal_care/screen/addeventpage_screen.dart';
@@ -10,7 +15,7 @@ import 'package:table_calendar/table_calendar.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = '/signInScreen/homeScreen';
-  
+
   @override
   State<StatefulWidget> createState() {
     return _HomeState();
@@ -53,17 +58,16 @@ class _HomeState extends State<HomeScreen> {
               onTap: con.signOut,
             ),
             ListTile(
-                leading: Icon(Icons.exit_to_app),
-                title: Text('About page'),
-                onTap: con.about,
-              ),
-              ListTile(
-                leading: Icon(Icons.exit_to_app),
-                title: Text('Question Form'),
-                onTap: con.questionForm,
-              ),
+              leading: Icon(Icons.exit_to_app),
+              title: Text('About page'),
+              onTap: con.about,
+            ),
+            ListTile(
+              leading: Icon(Icons.exit_to_app),
+              title: Text('Question Form'),
+              onTap: con.questionForm,
+            ),
           ],
-          
         ),
       ),
       body: SingleChildScrollView(
@@ -83,6 +87,25 @@ class _HomeState extends State<HomeScreen> {
                 calendarStyle: CalendarStyle(),
                 builders: CalendarBuilders(),
               ),
+            ),
+            StreamBuilder(
+              stream: eventDBS.streamList(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.hasData) {
+                  final events = snapshot.data;
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                      itemCount: events.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        AppEvent event = events[index];
+                        return ListTile(title: Text(event.title),
+                        subtitle: Text(DateFormat("EEEE, dd MMMM, yyyy").format(event.date)),
+                        );
+                      });
+                }
+                return CircularProgressIndicator();
+              },
             )
           ],
         ),
@@ -91,7 +114,7 @@ class _HomeState extends State<HomeScreen> {
         child: Icon(Icons.add),
         onPressed: () {
           Navigator.pushNamed(context, AddEventPageScreen.routeName,
-          arguments: _calendarController.selectedDay);
+              arguments: _calendarController.selectedDay);
         },
       ),
     );
@@ -102,18 +125,17 @@ class _Controller {
   _HomeState _state;
   _Controller(this._state);
 
-
-    // read all question's from firebase
-    void questionForm() async {
+  // read all question's from firebase
+  void questionForm() async {
     await Navigator.pushNamed(_state.context, QuestionHomeScreen.routeName,
-    arguments: {
-      'user': _state.user,
-      'personalCareList': _state.personalCare
-    });
+        arguments: {
+          'user': _state.user,
+          'personalCareList': _state.personalCare
+        });
     _state.render(() {});
   }
 
-    void about() {
+  void about() {
     Navigator.pushNamed(_state.context, AboutPageScreen.routeName);
   }
 
