@@ -9,6 +9,7 @@ import 'package:personal_care/model/app_event.dart';
 import 'package:personal_care/model/personalcare.dart';
 import 'package:personal_care/screen/aboutpage_screen.dart';
 import 'package:personal_care/screen/addeventpage_screen.dart';
+import 'package:personal_care/screen/event_details.dart';
 import 'package:personal_care/screen/questionhome_screen.dart';
 import 'package:personal_care/screen/signin_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -101,6 +102,8 @@ class _HomeState extends State<HomeScreen> {
                         AppEvent event = events[index];
                         return ListTile(title: Text(event.title),
                         subtitle: Text(DateFormat("EEEE, dd MMMM, yyyy").format(event.date)),
+                        // onTap: () => Navigator.pushNamed(context, EventDetails.routeName,
+                        // arguments: event),
                         );
                       });
                 }

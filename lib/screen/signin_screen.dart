@@ -4,6 +4,7 @@ import 'package:personal_care/controller/Authentication.dart';
 import 'package:personal_care/controller/firebasecontrollor.dart';
 import 'package:personal_care/screen/home_screen.dart';
 import 'package:personal_care/screen/myview/mydialog.dart';
+import 'package:personal_care/screen/reset_password_screen.dart';
 import 'package:personal_care/screen/signup_screen.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -119,6 +120,13 @@ class _SignInState extends State<SignInScreen> {
                 height: 30.0,
               ),
               FlatButton(
+                  onPressed: con.forgotPassword,
+                  child: Text(
+                    'forgot password',
+                    style: TextStyle(fontSize: 15.0),
+                  ),
+                ),
+              FlatButton(
                 onPressed: con.signUp,
                 child: Text(
                   'No account yet? Sign Up',
@@ -138,6 +146,10 @@ class _Controller {
   _Controller(this.state);
   String email;
   String password;
+
+    void forgotPassword() {
+    Navigator.pushNamed(state.context, ResetPasswordScreen.routeName);
+  }
 
   void signUp() async {
     Navigator.pushNamed(state.context, SignUpScreen.routeName);
