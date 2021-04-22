@@ -44,7 +44,7 @@ class _QuestionHomeState extends State<QuestionHomeScreen> {
         child: Icon(Icons.add_comment),
         onPressed: con.add_comment,
       ),
-      body: personalCare.length == 1 
+      body: personalCare.length == 0 
       ? Text('No Question Form', style: TextStyle(fontSize: 30.0),)
       : ListView.builder(
         itemCount: personalCare.length,
